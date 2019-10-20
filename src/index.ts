@@ -10,8 +10,8 @@ class Board {
   private _currentPlayer: number;
   private _clickFn: (e: MouseEvent) => void;
   /**Constructor */
-  constructor(r: number, c: number) {
-    this._gridNum = r;
+  constructor(gridNum: number) {
+    this._gridNum = gridNum;
     this._currentPlayer = Cell.X;
     this.draw();
     this._clickFn = this.clickHandle.bind(this);
@@ -25,7 +25,7 @@ class Board {
       html += '<div class="row">';
       for (let j = 0; j < this._gridNum; j += 1) {
         html += `
-          <span class="cell" row="${i}" col="${j}">""</span>
+          <span class="cell" row="${i}" col="${j}"> </span>
         `;
       }
       html += '</div>';
@@ -45,7 +45,6 @@ class Board {
         target.innerText = Cell[this._currentPlayer];
         this._cells[row][col] = this._currentPlayer;
         if (this.isGameOver(row, col)) {
-          console.log('game over');
           document.getElementById('info').innerText = `${
             Cell[this._currentPlayer]
           } Win`;
@@ -92,7 +91,7 @@ class Board {
       .getElementById('board')
       .removeEventListener('click', this._clickFn);
   }
-  /**Public Methos */
+  /**Public Methods */
   public restart() {
     this._cells = [];
     this._currentPlayer = Cell.X;
@@ -103,7 +102,7 @@ class Board {
   }
 }
 
-const board: Board = new Board(3, 3);
+const board: Board = new Board(4);
 
 document.getElementById('restart').addEventListener('click', function() {
   board.restart();

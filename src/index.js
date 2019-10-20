@@ -6,10 +6,10 @@ var Cell;
 })(Cell || (Cell = {}));
 var Board = /** @class */ (function () {
     /**Constructor */
-    function Board(r, c) {
+    function Board(gridNum) {
         /**Properties */
         this._cells = [];
-        this._gridNum = r;
+        this._gridNum = gridNum;
         this._currentPlayer = Cell.X;
         this.draw();
         this._clickFn = this.clickHandle.bind(this);
@@ -22,7 +22,7 @@ var Board = /** @class */ (function () {
             this._cells.push([]);
             html += '<div class="row">';
             for (var j = 0; j < this._gridNum; j += 1) {
-                html += "\n          <span class=\"cell\" row=\"" + i + "\" col=\"" + j + "\">\"\"</span>\n        ";
+                html += "\n          <span class=\"cell\" row=\"" + i + "\" col=\"" + j + "\"> </span>\n        ";
             }
             html += '</div>';
         }
@@ -83,7 +83,7 @@ var Board = /** @class */ (function () {
             .getElementById('board')
             .removeEventListener('click', this._clickFn);
     };
-    /**Public Methos */
+    /**Public Methods */
     Board.prototype.restart = function () {
         this._cells = [];
         this._currentPlayer = Cell.X;
@@ -94,7 +94,7 @@ var Board = /** @class */ (function () {
     };
     return Board;
 }());
-var board = new Board(3, 3);
+var board = new Board(4);
 document.getElementById('restart').addEventListener('click', function () {
     board.restart();
 });
